@@ -19,7 +19,7 @@
     margin: 0 auto;}
 
     header {
-      background: -webkit-linear-gradient(left, #00d39f 0%, #008bd3 25%, #d40063 75%, #d4be00 100%);
+      background: #FFF;
       color: #fff;
       padding: 1.5rem 2rem;
       text-align: center;
@@ -39,7 +39,7 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      background-color: #fff;
+      background-color: #000;
       padding: 1rem 0;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
