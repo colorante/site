@@ -30,6 +30,8 @@
       font-weight: bold;
       margin-bottom: 0.5rem;
     }
+	
+	h2 {color: #0d6efd;}
 
     header p {
       font-size: 1.2rem;
