@@ -41,17 +41,14 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      background-color: #000;
       padding: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: white;
-  z-index: 1000;
-
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      z-index: 1000;
     }
 
     nav a {
