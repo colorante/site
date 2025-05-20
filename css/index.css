@@ -67,9 +67,6 @@ h3 {
 
 /* Navegação */
 nav {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
   padding: 1rem 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -107,6 +104,14 @@ nav a:hover,
 nav a.active,
 nav a:active {
   color: #ff4d6d;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+	margin: 0 auto; 
+	max-width:750px;
 }
 
 /* Outros textos centralizados */
