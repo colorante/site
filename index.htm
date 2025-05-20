@@ -29,8 +29,8 @@
   <div class="menu">
     <a href="#vantagens">Por que escolher a Colorante Pinturas?</a>
     <a href="#about">Sobre</a>
+	 <a href="#gallery">Galeria</a>
     <a href="#contact">Contato</a>
-    <a href="#gallery">Galeria</a>
   </div>
 </nav>
 
@@ -100,17 +100,93 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
   
-  <script>
+<script>
   function ajustarEspacoNav() {
     const nav = document.querySelector('nav');
-    const proximo = document.querySelector('header'); // ou qualquer elemento logo abaixo
+    const proximo = document.querySelector('header');
     if (proximo && nav) {
       proximo.style.marginTop = nav.offsetHeight + 'px';
     }
   }
-
   window.addEventListener('load', ajustarEspacoNav);
   window.addEventListener('resize', ajustarEspacoNav);
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('nav a');
+
+    links.forEach(link => {
+      link.addEventListener('click', function () {
+        // Remove 'active' de todos os links
+        links.forEach(l => l.classList.remove('active'));
+
+        // Adiciona 'active' no link clicado
+        this.classList.add('active');
+      });
+    });
+  });
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const links = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section');
+  const navHeight = document.querySelector('nav').offsetHeight;
+
+  // Scroll suave ao clicar
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - navHeight,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  function onScroll() {
+    let currentId = '';
+    const scrollPos = window.scrollY;
+    const windowBottom = scrollPos + window.innerHeight;
+    const pageHeight = document.body.offsetHeight;
+
+    // Se chegou ao fim da página, ativa a última seção
+    if (windowBottom >= pageHeight - 2) {
+      currentId = sections[sections.length - 1].getAttribute('id');
+    } else {
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - navHeight - 10;
+        if (scrollPos >= sectionTop) {
+          currentId = section.getAttribute('id');
+        }
+      });
+    }
+
+    // Atualiza as classes dos links
+    links.forEach(link => {
+      const href = link.getAttribute('href').substring(1);
+      if (href === currentId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+});
+</script>
+
+
+
 </body>
 </html>

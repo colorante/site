@@ -58,11 +58,9 @@
       padding: 0.5rem 1rem;
       border-radius: 30px;
       transition: background-color 0.3s ease;
-    }
-
-   nav a {
+   
   position: relative;
-  color: #ff4d6d;
+ 
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -70,16 +68,24 @@
 nav a::after {
   content: '';
   position: absolute;
-  width: 0%;
-  height: 2px;
-  bottom: 0;
   left: 0;
-  background-color: #ff4d6d;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #007bff; /* azul */
   transition: width 0.3s ease-in-out;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+nav a.active::after,
+nav a:active::after {
   width: 100%;
+}
+
+nav a:hover,
+nav a.active,
+nav a:active {
+  color: #ff4d6d; /* vermelho */
 }
 	
 	.menu{text-align: center;}
