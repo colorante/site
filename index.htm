@@ -99,5 +99,18 @@
  
 
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+  
+  <script>
+  function ajustarEspacoNav() {
+    const nav = document.querySelector('nav');
+    const proximo = document.querySelector('header'); // ou qualquer elemento logo abaixo
+    if (proximo && nav) {
+      proximo.style.marginTop = nav.offsetHeight + 'px';
+    }
+  }
+
+  window.addEventListener('load', ajustarEspacoNav);
+  window.addEventListener('resize', ajustarEspacoNav);
+</script>
 </body>
 </html>
