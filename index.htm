@@ -105,11 +105,17 @@
   function ajustarEspacoNav() {
     const nav = document.querySelector('nav');
     const proximo = document.querySelector('header');
-    if (proximo && nav) {
+    if (nav && proximo) {
       proximo.style.marginTop = nav.offsetHeight + 'px';
     }
   }
-  window.addEventListener('load', ajustarEspacoNav);
+
+  window.addEventListener('load', () => {
+    requestAnimationFrame(() => {
+      ajustarEspacoNav();
+    });
+  });
+
   window.addEventListener('resize', ajustarEspacoNav);
 </script>
 
