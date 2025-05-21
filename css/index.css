@@ -120,7 +120,7 @@ nav a:active {
 }
 #dv-about {
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #FFF;
   border-radius: 20px;
   margin: 2rem auto;
 }
@@ -155,7 +155,7 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: #FFF;
   border-radius: 20px;
   margin: 2rem auto;
 }
@@ -194,3 +194,18 @@ footer {
 #contact a {
   color: #0dcaf0;
 }
+
+ .tiktok-wrapper {
+	 position: relative;
+	padding: 2rem;
+    background-color: #FFF;
+    border-radius: 20px;
+    margin: 2rem auto;
+  
+  }
+
+  .tiktok-wrapper iframe {
+  
+   
+  }
+  
