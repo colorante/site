@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Simulador de valor de mão de obra de pintura." />
+		<meta property="og:image" content="https://www.pintorpontagrossa.com.br/simular/img/simular.jpg" />
+        
+        <title>Colorante Pinturas - Simulador de valor</title>
+
+        <!-- Favicon-->
+        <link rel="icon" href="/pintor/assets/favicon.svg" />
+        <link rel="apple-touch-icon" href="/pintor/assets/favicon.svg"/>
+     
+      <link href="/pintor/css/styles.css" rel="stylesheet" />
+	<style>
+	#ul_rusultado {list-style: none; padding: 0;}
+	#ul_rusultado li {border: solid 1px; padding:5px;}
+	#obs {font-style: italic;}
+	#obstxt {color:#F00;}
+	
+	
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .page-section {
+        padding: 3rem 1rem;
+    }
+
+    h2.page-section-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #005fa3;
+        margin-bottom: 1rem;
+    }
+
+    .divider-custom {
+        width: 80px;
+        height: 4px;
+        background-color: #005fa3;
+        margin: 1rem auto;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label, p {
+        font-weight: 600;
+        margin-bottom: .5rem;
+    }
+
+    input[type="number"],
+    select,
+    .form-control {
+        padding: 0.6rem;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 0.5rem;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    input[type="radio"] {
+        margin-right: 8px;
+    }
+
+    #ul_rusultado {
+        list-style: none;
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    #ul_rusultado li {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    #h3_total {
+        font-size: 1.5rem;
+        color: #008000;
+        margin-top: 1rem;
+    }
+
+    #obs {
+        font-style: italic;
+        margin-top: 2rem;
+    }
+
+    #obstxt {
+        color: #a00;
+        font-size: 0.95rem;
+        background-color: #fff3f3;
+        padding: 1rem;
+        border-left: 4px solid #a00;
+        border-radius: 4px;
+    }
+
+    button.btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        margin-top: 0.5rem;
+    }
+
+    .btn-primary {
+        background-color: #005fa3;
+        border-color: #004b82;
+    }
+
+    .btn-primary:hover {
+        background-color: #004b82;
+    }
+
+    .btn-secondary {
+        background-color: #777;
+        border-color: #666;
+    }
+
+    .btn-secondary:hover {
+        background-color: #666;
+    }
+
+    footer.footer {
+        background-color: #005fa3;
+        color: #fff;
+        padding: 2rem 1rem;
+    }
+
+    footer a.text-white {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    .social-btns img {
+        width: 32px;
+        margin: 0 0.4rem;
+        transition: transform 0.2s;
+    }
+
+    .social-btns img:hover {
+        transform: scale(1.1);
+    }
+
+    .credito {
+        background-color: #004b82;
+        padding: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .linkcredito {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .form-control {
+            max-width: 100%;
+        }
+    }
+	
+	.container {
+    max-width: 720px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+	</style>
+    </head>
+    <body id="inicio">
+
+      
+		<section class="page-section" id="/simular">
+      
+            <div class="container">
+ <section id="valor">
+
+		  
+		   <h2 class="page-section-heading text-center text-uppercase  mb-0">Simulador de valor</h2>
+		   
+		   <div class="divider-custom"></div>
+           
+	<form id="form">
+    <div class="form-group">
+	 <p><strong>Serviço</strong></p>
+	<select id="servicom" class="form-control" required>
+    <option value="">-- Selecione um serviço --</option>
+	<option value="3" data-id="1">Pintura interna (apenas pintar)</option>
+	<option value="5" data-id="2">Pintura interna com pequenos reparos (furos, pequenas rachaduras ou arranhões)</option>
+	<option value="10" data-id="3">Pintura interna com muitos reparos (infiltrações, descascando, rachaduras ou reparos no reboco)</option>
+	
+	<option value="20" data-id="4">Pintura interna nova (Reboco ou Drywall)</option>
+	
+	<option value=""></option>
+	<option value="3" data-id="5">Pintura externa (apenas pintar)</option>
+	<option value="5" data-id="6">Pintura externa parede suja (lavar e pintar)</option>
+	<option value="8" data-id="7">Pintura externa com pequenos reparos (furos, pequenas rachaduras ou arranhões)</option>
+	<option value="15" data-id="8">Pintura externa com muitos reparos (infiltrações, descascando, rachaduras ou reparos no reboco)</option>
+	
+		<option value="30" data-id="9">Pintura externa nova (Reboco ou Drywall)</option>
+		
+		<option value=""></option>
+		<option value="15" data-id="10">Textura Rolada</option>
+		<option value="25" data-id="11">Textura Projetada</option>
+		<option value=""></option>
+		
+		<option value="25" data-id="12">Pintura de porta</option>
+		<option value="50" data-id="13">Pintura de janela</option>
+		<option value="50" data-id="14">Pintura de grade</option>
+    </select>
+ </div>
+ <hr/>
+<p><strong>Grau de dificuldade do serviço</strong></p>
+<div class="form-group">
+  <label for="normal">
+    <input type="radio" name="nivel_de_dificuldade" id="normal" value="normal" checked>
+    Normal — execução padrão, sem dificuldades significativas.
+  </label><br>
+  
+  <label for="moderado">
+    <input type="radio" name="nivel_de_dificuldade" id="moderado" value="moderado">
+    Moderado — pode exigir cuidados adicionais e mais tempo, por exemplo, em imóvel mobiliado.
+  </label><br>
+  
+  <label for="dificil">
+    <input type="radio" name="nivel_de_dificuldade" id="dificil" value="dificil">
+    Difícil — envolve riscos e custos adicionais com equipamentos, por exemplo, trabalho em altura.
+  </label>
+</div>
+
+	
+	 <hr/>
+  <div class="form-group">
+   
+  
+	<p><strong>Metros quadrados (M²) | <a href="Javascript:calcularparede();">Quantos M² tem minha parede?</a> | <a href="Javascript:calcularpeca();">Quantos M² tem meu cômodo</a> |</strong></p>
+    <input type="number" class="form-control" id="metros_quadrados" min="1" required>
+  </div>
+          
+   <hr/>
+     <div class="form-group">
+  <button type="button" class="btn btn-primary" id="bnt-add" onclick="add();"><span class="glyphicon glyphicon-plus"></span> Adicionar serviço</button>&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" id="reset" onclick="if (window.confirm('Tem certeza de que deseja resetar?')) resetar();">Resetar</button> 
+  
+  </div>
+ 
+ 
+ <hr/>
+
+ <div id="stts"></div> <p>
+<div id="resultado">
+<ul id="ul_rusultado"></ul><h3 id="h3_total"></h3></p>
+</div>
+
+
+<div id="obs"></div>
+		
+		</form>
+
+		
+   
+    
+ 
+       
+    
+   
+	</section>
+	
+	 </div>
+
+	<script src="/pintor/js/jquery.js"></script>
+		   <script src="/pintor/js/bootstrap.min.js"></script> 
+<script>
+	
+	//preços
+	function number_format(number, decimals, dec_point, thousands_sep) {
+    number = (number+'').replace(',', '').replace(' ', '');
+    var n = !isFinite(+number) ? 0 : +number, 
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+}
+
+var subtotal_total = 0;
+var total_total = 0;
+    function add () {
+	if (document.getElementById('servicom').value != '') { 
+	if (document.getElementById('metros_quadrados').value != '') { 
+	
+        document.getElementById('stts').innerhtml = '';
+document.getElementById('stts').innerhtml = 'Adicionando...';		
+
+if (total_total == 0) document.getElementById('resultado').innerhtml ='<hr/><ul id="ul_rusultado"></ul><h3 id="h3_total"></h3><p>';	
+	   
+	var servico = document.getElementById('servicom').value;
+	var metros_quadrados = document.getElementById('metros_quadrados').value;
+	metros_quadrados = metros_quadrados.replace(' ', '');            
+	metros_quadrados = metros_quadrados.replace(',', '.');
+    servico = servico.replace(' ', '');
+    servico = servico.replace(',', '.');
+   
+	var total = parseFloat(servico) * parseFloat(metros_quadrados);
+
+    var tipoimovel = '';
+	
+	if (document.getElementById('normal').checked == true) {
+		tipoimovel = 'Normal — execução padrão, sem dificuldades significativas.';
+		}
+	
+	if (document.getElementById('moderado').checked == true) {
+		total = total * 3;
+		tipoimovel = 'Moderado — pode exigir cuidados adicionais e mais tempo, por exemplo, em imóvel mobiliado.';
+		}
+	
+	if (document.getElementById('dificil').checked == true) {
+		total = total * 10;
+		tipoimovel = 'Difícil — envolve riscos e custos adicionais com equipamentos, por exemplo, trabalho em altura.';
+		}
+	
+     var subtotal = total;
+	subtotal_total = subtotal_total + subtotal;
+    total_total = subtotal_total;
+	
+	var select = document.getElementById('servicom');
+var servico = select.options[select.selectedIndex].text;
+	
+	
+var ul = document.getElementById("ul_rusultado");
+  var li = document.createElement("li");
+  var tinta = parseFloat( metros_quadrados / 7.222222222222222 );
+  
+  
+  var gesso = 0;
+  var massa = 0;
+  var massareboco = 0;
+  var lixa = 0;
+  var selador  = 0;
+  var solvente = 0;
+  var legenda = '';
+  
+  if (tinta < 1 ) tinta = 1;
+  
+  if (tinta < 2) legenda = 'litro'; else legenda = 'litros';
+
+
+  ul.appendChild(li);	
+  
+  li.innerHTML = metros_quadrados+' M² de '+servico+'<br />Grau de dificuldade do serviço: '+tipoimovel+' <br />Valor aproximado da mão de obra: <strong>R$ '+number_format(subtotal, 2,',','.')+'</strong>';
+  
+  
+  if (select.options[select.selectedIndex].getAttribute("data-id") == 1) {
+	  li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	   //lixa
+	  lixa = parseInt( metros_quadrados / 30 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+  }
+  
+   if (select.options[select.selectedIndex].getAttribute("data-id") == 2) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  //gesso
+	  gesso = parseFloat( metros_quadrados / 200 );
+	  if (gesso < 1 ) gesso = 1;
+	  if (gesso < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+gesso.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de gesso (valor a consultar)';
+	  //
+	  
+	  //massa
+	  massa = parseFloat( metros_quadrados / 100 );
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida PVA (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 30 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+    if (select.options[select.selectedIndex].getAttribute("data-id") == 3) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  
+	  	  //gesso
+	  gesso = parseFloat( metros_quadrados / 100 );
+	  if (gesso < 1 ) gesso = 1;
+	  if (gesso < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+gesso.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de gesso (valor a consultar)';
+	  //
+	  
+	  //massa
+	  massa = parseFloat( metros_quadrados / 28 );
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida PVA (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 20 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+  
+  
+    if (select.options[select.selectedIndex].getAttribute("data-id") == 4) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  //selador
+   selador = parseFloat( metros_quadrados / 14.44444444444444 );
+  if (selador < 1 ) selador = 1;
+  var legenda = '';
+  if (selador < 2) legenda = 'litro'; else legenda = 'litros';
+	  li.innerHTML +='<br />Aproximadamente: '+selador.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de selador acrílico (valor a consultar)';
+	  //
+	  
+	  
+	  //massa
+	  massa = parseFloat(metros_quadrados);
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida PVA (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 10 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+  
+  ////////prafora
+  
+  
+  
+  
+  
+    if (select.options[select.selectedIndex].getAttribute("data-id") == 5 || select.options[select.selectedIndex].getAttribute("data-id") == 6) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	   //lixa
+	  lixa = parseInt( metros_quadrados / 30 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+  }
+  
+  
+  
+   if (select.options[select.selectedIndex].getAttribute("data-id") == 7) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  //massa de reboco
+	  massareboco = parseFloat( metros_quadrados / 200 );
+	  if (massareboco < 1 ) massareboco = 1;
+	  if (massareboco < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massareboco.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa para reboco (valor a consultar)';
+	  //
+	  
+	  //massa
+	  massa = parseFloat( metros_quadrados / 100 );
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida acrílica (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 30 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+    if (select.options[select.selectedIndex].getAttribute("data-id") == 8) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  
+	  	 //massa de reboco
+	  massareboco = parseFloat( metros_quadrados / 100 );
+	  if (massareboco < 1 ) massareboco = 1;
+	  if (massareboco < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massareboco.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa para reboco (valor a consultar)';
+	  //
+	  
+	  //massa
+	  massa = parseFloat( metros_quadrados / 28 );
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida acrílica (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 20 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+  
+  
+    if (select.options[select.selectedIndex].getAttribute("data-id") == 9) {
+	  li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	  
+	  //selador
+   selador = parseFloat( metros_quadrados / 14.44444444444444 );
+  if (selador < 1 ) selador = 1;
+  var legenda = '';
+  if (selador < 2) legenda = 'litro'; else legenda = 'litros';
+	  li.innerHTML +='<br />Aproximadamente: '+selador.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de selador acrílico (valor a consultar)';
+	  //
+	  
+	  
+	  //massa
+	  massa = parseFloat(metros_quadrados);
+	  if (massa < 1 ) massa = 1;
+	  if (massa < 2) legenda = 'quilo'; else legenda = 'quilos';
+	  li.innerHTML +='<br />Aproximadamente: '+massa.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de massa corrida acrílica (valor a consultar)';
+	  //
+	  
+	  //lixa
+	  lixa = parseInt( metros_quadrados / 10 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+  }
+  
+  
+  //textura
+  
+
+  if (select.options[select.selectedIndex].getAttribute("data-id") == 10) {
+	  
+	    //textura
+	
+	  textura = parseInt( metros_quadrados * 2 );
+	  if (textura < 1 ) textura= 1;
+	 if (textura < 2) legenda = 'quilo'; else legenda = 'quilos';
+	 li.innerHTML +='<br />Aproximadamente: '+textura.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de textura (valor a consultar)';
+  
+  }
+  
+    //textura projetada
+  
+
+  if (select.options[select.selectedIndex].getAttribute("data-id") == 11) {
+	   
+	    //textura
+	
+	  textura = parseInt( metros_quadrados * 4 );
+	  if (textura < 1 ) textura= 1;
+	 if (textura < 2) legenda = 'quilo'; else legenda = 'quilos';
+	 li.innerHTML +='<br />Aproximadamente: '+textura.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de textura (valor a consultar)';
+  
+  }
+  
+  //portas, janelas e grades
+  
+  if (select.options[select.selectedIndex].getAttribute("data-id") == 12 || select.options[select.selectedIndex].getAttribute("data-id") == 13 || select.options[select.selectedIndex].getAttribute("data-id") == 14) {
+	   li.innerHTML +='<br />Aproximadamente: '+tinta.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de tinta (valor a consultar)';
+	   
+	    //solvente
+	
+	  solvente = parseInt( metros_quadrados / 26 );
+	  if (solvente < 1 ) solvente = 1;
+	 if (solvente < 2) legenda = 'litro'; else legenda = 'litros';
+	 li.innerHTML +='<br />Aproximadamente: '+solvente.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' '+legenda+' de solvente (valor a consultar)';
+	   
+	  //
+	  
+	   //lixa
+	  lixa = parseInt( metros_quadrados / 4 );
+	  if (lixa < 1 ) lixa = 1;
+	  if (lixa < 2) legenda = 'lixa'; else legenda = 'lixas';
+	  li.innerHTML +='<br />Aproximadamente: '+lixa+' '+legenda+' (valor a consultar)';
+	  //
+	  
+	  
+  }
+  
+  
+  
+	if (total_total < 300) 
+	document.getElementById("h3_total").innerHTML = 'Valor total aproximado da mão de obra: R$ 300,00 (valor mínimo)'; else
+	document.getElementById("h3_total").innerHTML = 'Valor total aproximado da mão de obra: R$ '+number_format(total_total, 2,',','.');
+
+
+   document.getElementById('obs').innerHTML = `
+  <hr/>
+  <div id="obstxt">
+    <p>
+      Os valores de mão de obra apresentados neste simulador são estimativas baseadas em nossa experiência prática com serviços realizados em Ponta Grossa – PR. Os preços podem variar dependendo da região.
+    </p>
+    <p>
+      Lembre-se: os valores calculados são aproximados. O orçamento final só pode ser definido após a visita de um profissional, que avaliará as medidas e as condições reais das superfícies.
+    </p>
+    <p>
+      As estimativas de materiais também são aproximadas. Como cada superfície possui características próprias, como textura e absorção, a quantidade necessária pode variar.
+    </p>
+  </div>
+  <p>
+    Solicite orçamento via WhatsApp: <a target="_blank" href="https://api.whatsapp.com/send/?phone=5542999171305">(42) 99917-1305</a> ou via E-mail: <a href="mailto:colorantepinturas@gmail.com">colorantepinturas@gmail.com</a>
+  </p>
+`;
+
+
+ 
+	
+	 document.getElementById('servicom').selectedIndex=0;
+	
+	 document.getElementById('metros_quadrados').value = '';
+     document.getElementById('stts').innerHTML = '';
+     window.location.hash="resultado";
+	 
+
+	//resultado aqui
+	
+	} else alert('Insira a quantidade de metros quadrados!'); } else alert('Selecione um serviço!');
+	
+	
+    };
+	
+	//função resetar
+	function resetar() {
+	document.getElementById('servicom').selectedIndex=0;
+	document.getElementById('normal').checked = true;
+	document.getElementById('metros_quadrados').value = '';
+	subtotal_total = 0;
+	total_total = 0;
+document.getElementById("resultado").innerHTML = '<ul id="ul_rusultado"></ul><h3 id="h3_total"></h3><p>';
+	}
+
+function calcularparede() {
+
+var largura = prompt("Qual é a largura da parede?", "");
+if (largura == null || largura == "") {
+    txt = "Cancelado";
+} else {
+	
+		var altura = prompt("Qual é a altura da parede?", "");
+if (altura == null || altura == "") {
+    txt = "Cancelado";
+} else {
+	
+	largura = largura.replace(',', '.');
+	altura = altura.replace(',', '.');
+	
+	
+	var parede = ( parseFloat(largura) * parseFloat(altura) );
+	
+	
+	alert('A parede tem '+parede.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' M²');
+	
+	
+}
+	
+}
+	
+}
+
+
+function calcularpeca() {
+	
+var comprimento = prompt("Qual é o comprimento do cômodo?", "");
+if (comprimento == null || comprimento == "") {
+    txt = "Cancelado";
+} else {
+	
+	var largura = prompt("Qual é a largura do cômodo?", "");
+if (largura == null || largura == "") {
+    txt = "Cancelado";
+} else {
+	
+	
+	var altura = prompt("Qual é a altura do cômodo?", "");
+if (altura == null || altura == "") {
+    txt = "Cancelado";
+} else {
+	
+	comprimento = comprimento.replace(',', '.');
+	largura = largura.replace(',', '.');
+	altura = altura.replace(',', '.');
+	
+	var teto = parseFloat(comprimento) * parseFloat(largura);
+	var paredes = ((parseFloat(comprimento) + parseFloat(largura)) * 2) * parseFloat(altura);
+	
+	
+	alert('O cômodo tem '+teto.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' M² de teto e '+paredes.toFixed(1).replace(/\.?0+$/, '').replace('.', ',')+' M² de paredes');
+	
+}
+	
+	
+}
+	
+}  
+
+
+}
+</script>
+
+ <script>
+         $(document).ready(function() {
+            $("#form").submit(function(e){
+                add();
+                e.preventDefault(e);
+            });
+        });
+        </script>
+<div id="whats" class="floating-wpp"></div>
+<link rel="stylesheet" href="/pintor/css/floating-wpp.min.css">
+<script src="/pintor/js/floating-wpp.min.js"></script>
+
+<script>
+   $(function () {
+           $('#whats').floatingWhatsApp({
+               phone: '5542999171305', //WhatsApp Business phone number
+               headerTitle: 'Fale conosco via WhatsApp!', //Popup Title
+               popupMessage: 'Olá, como podemos te ajudar?', //Popup Message
+               showPopup: true, //Enables popup display
+               buttonImage: '<img src="/pintor/assets/img/whatsappcc.svg" alt="Icone do WhatsApp" />', //Button Image
+               //headerColor: 'crimson', //Custom header color
+               //backgroundColor: 'crimson', //Custom background button color
+               position: "right",
+               size: "50px"		   //Position: left | right
+
+           });
+       });
+</script>
+
+	   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4757RWJGSP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4757RWJGSP');
+</script>
+
+  </body>
+
+</html>
