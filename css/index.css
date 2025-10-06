@@ -209,5 +209,14 @@ footer {
    
   }
   
+  .instagram-wrapper {
+	 position: relative;
+	padding: 2rem;
+    background-color: #FFF;
+    border-radius: 20px;
+    margin: 2rem auto;
+  
+  }
+  
 .instagram-media, .playlist-playlistCard-Container {width:100%;}
   
